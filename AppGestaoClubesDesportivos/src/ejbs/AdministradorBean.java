@@ -3,13 +3,13 @@ package ejbs;
 import entities.Administrador;
 
 import javax.ejb.EJBException;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless(name = "AdministratorEJB")
-public class AdministratorBean {
+@Stateful(name = "AdministradorEJB")
+public class AdministradorBean {
 
     @PersistenceContext
     private EntityManager em;
@@ -28,13 +28,14 @@ public class AdministratorBean {
         }
     }
 
-    public Administrador findStudent(String userId) {
+ public Administrador findAdmin(String userId) {
         try {
             return em.find(Administrador.class, userId);
         } catch (Exception e) {
             throw new EJBException("ERROR_FINDING_ADMINISTRADOR", e);
         }
     }
+
 
     public List<Administrador> all() {
         try {
