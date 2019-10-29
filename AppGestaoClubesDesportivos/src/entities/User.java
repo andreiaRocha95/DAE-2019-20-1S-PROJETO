@@ -1,62 +1,53 @@
 package entities;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Entity
-@NamedQueries({
-        @NamedQuery(
-                name = "getAllAdministradores",
-                query = "SELECT a FROM Administrador a ORDER BY a.nome"
-        )
-})
-
-@Table(name="ADMINISTRADORES")
-public class Treinador implements Serializable {
+public class User implements Serializable {
 
     @Id
-    private int userId;
+    private String username;
 
-    @NotNull    private String nome;
+    @Version
+    private int version;
 
     @NotNull
     private String password;
+
+    @NotNull
+    private String name;
+
+
 
     @NotNull
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
             +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
             +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
             message = "{invalid.email}")
-
     private String email;
 
-    public Administrador() {
+    public User() {
     }
 
-    public Administrador(int userId, String nome, String password, String email) {
-        this.userId = userId;
-        this.nome = nome;
+    public User(String username, String password, String name, String email) {
+        this.username = username;
         this.password = password;
+        this.name = name;
         this.email = email;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -67,6 +58,14 @@ public class Treinador implements Serializable {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -74,4 +73,7 @@ public class Treinador implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+
 }

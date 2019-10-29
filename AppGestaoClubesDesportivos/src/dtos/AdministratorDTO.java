@@ -9,20 +9,20 @@ public class AdministradorDTO {
     public AdministradorDTO() {
     }
 
-    public AdministradorDTO(int userId, String nome, String password, String email) {
-        this.userId = userId;
+    public AdministradorDTO(String nome, String password, String email) {
+       // this.userId = userId;
         this.nome = nome;
         this.password = password;
         this.email = email;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+//    public int getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(int userId) {
+//        this.userId = userId;
+//    }
 
     public String getNome() {
         return nome;
