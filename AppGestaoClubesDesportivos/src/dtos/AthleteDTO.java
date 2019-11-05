@@ -1,16 +1,16 @@
 package dtos;
 
-public class CoachDTO {
+public class AthleteDTO {
     private int userId;
     private String name;
     private String password;
     private String email;
 
-    public CoachDTO() {
+    public AthleteDTO() {
     }
 
-    public CoachDTO(int userId, String name, String password, String email) {
-        this.userId=userId;
+    public AthleteDTO(int userId, String name, String password, String email) {
+        this.userId = userId;
         this.name = name;
         this.password = password;
         this.email = email;

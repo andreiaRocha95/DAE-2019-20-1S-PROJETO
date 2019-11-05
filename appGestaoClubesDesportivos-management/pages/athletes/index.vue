@@ -2,7 +2,7 @@
   <!-- easy components usage, already shipped with bootstrap css-->
   <div>
     <b-container>
-      <h1> Administrators Management</h1>
+      <h1> Athletes Management</h1>
       <div>
         <b-navbar toggleable="lg" type="light">
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -25,24 +25,24 @@
           </b-collapse>
         </b-navbar>
       </div>
-      <b-table striped over :items="administrators" :fields="fields">
+      <b-table striped over :items="athletes" :fields="fields">
         <template v-slot:cell(actions)="row">
 
-          <nuxt-link class="" :to="`/administrators/${row.item.userId}`">
+          <nuxt-link class="" :to="`/athletes/${row.item.userId}`">
             <b-button variant="">
             Details
           </b-button>
           </nuxt-link>
 
 
-            <nuxt-link class="":to="`/administrators/${row.item.userId}`">
+            <nuxt-link class="":to="`/athletes/${row.item.userId}`">
               <b-button variant="info">
               Edit
           </b-button>
             </nuxt-link>
 
 
-            <nuxt-link class="":to="`/administrators/${row.item.userId}`">
+            <nuxt-link class="":to="`/athletes/${row.item.userId}`">
               <b-button variant="danger">
               Delete
               </b-button>
@@ -62,14 +62,14 @@
         data () {
             return {
                 fields: ['userId', 'name', 'email', 'actions'],
-                administrators: []
+                athletes: []
             }
         },
         created () {
-            this.$axios.$get("http://localhost:8080/AppGestaoClubesDesportivos_war_exploded/api/administrators/")
-            this.$axios.$get("/api/administrators")
-                .then(administrators => {
-                    this.administrators = administrators
+            this.$axios.$get("http://localhost:8080/AppGestaoClubesDesportivos_war_exploded/api/athletes/")
+            this.$axios.$get("/api/athletes")
+                .then(athletes => {
+                    this.athletes = athletes
                 })
         }
     }

@@ -1,6 +1,5 @@
 package ejbs;
 
-import entities.Coach;
 import entities.Partner;
 
 import javax.ejb.EJBException;
@@ -10,21 +9,22 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless(name = "PartnerEJB")
-public class PartenerBean {
+public class PartnerBean {
     @PersistenceContext
     private EntityManager em;
+
     public void create(int userId, String name, String password, String email) {
-        try{
-            Partner partner = new Partner(userId,name, password, email);
+        try {
+            Partner partner = new Partner(userId, name, password, email);
             em.persist(partner);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new EJBException("ERROR_CREATING_PARTNER", e);
         }
     }
 
     public Partner findPartner(int userId) {
-        try{
+        try {
             return em.find(Partner.class, userId);
         } catch (Exception e) {
             throw new EJBException("ERROR_FINDING_PARTNER", e);

@@ -5,8 +5,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class MyIllegalArgumentExceptionMapper implements ExceptionMapper<MyEntityExistsException>
-{
+public class MyIllegalArgumentExceptionMapper implements ExceptionMapper<MyEntityExistsException> {
     @Override
     public Response toResponse(MyEntityExistsException e) {
         return

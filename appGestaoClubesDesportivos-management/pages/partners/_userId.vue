@@ -1,14 +1,14 @@
 <template>
   <b-container class="p-4">
-    <h4>Coach Details:</h4>
+    <h4>Partner Details:</h4>
     <b-container>
       <br/>
-      <p><b>UserId:</b> {{ coach.userId }}</p>
-      <p><b>Name:</b> {{ coach.name }}</p>
-      <p><b>Email:</b> {{ coach.email }}</p>
+      <p><b>UserId:</b> {{ partner.userId }}</p>
+      <p><b>Name:</b> {{ partner.name }}</p>
+      <p><b>Email:</b> {{ partner.email }}</p>
     </b-container>
 
-    <nuxt-link to="/coaches"><b-button >Back</b-button></nuxt-link>
+    <nuxt-link to="/partners"><b-button >Back</b-button></nuxt-link>
 
   </b-container>
 </template>
@@ -16,7 +16,7 @@
     export default {
         data() {
             return {
-                coach: {}
+                partner: {}
             }
         },
         computed: {
@@ -25,8 +25,8 @@
             }
         },
         created() {
-            this.$axios.$get(`/api/coaches/${this.userId}`)
-                .then(coach => this.coach = coach || {})
+            this.$axios.$get(`/api/partners/${this.userId}`)
+                .then(partner => this.partner = partner || {})
         },
     }
 </script>

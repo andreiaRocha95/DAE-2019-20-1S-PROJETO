@@ -1,10 +1,16 @@
 <template>
+  <b-container class="p-4">
+  <h4>Administrator Details:</h4>
   <b-container>
-    <h4>Administrator Details:</h4>
-    <p>Username: {{ administrator.userId }}</p>
-    <p>Name: {{ administrator.name }}</p>
-    <p>Email: {{ administrator.email }}</p>
-    <nuxt-link to="/administrators">Back</nuxt-link>
+  <br/>
+    <p><b>UserId:</b> {{ administrator.userId }}</p>
+    <p><b>Name:</b> {{ administrator.name }}</p>
+    <p><b>Email:</b> {{ administrator.email }}</p>
+  </b-container>
+
+      <nuxt-link to="/administrators"><b-button >Back</b-button></nuxt-link>
+
+
   </b-container>
 </template>
 <script>
@@ -25,3 +31,7 @@
         },
     }
 </script>
+
+<style>
+
+</style>

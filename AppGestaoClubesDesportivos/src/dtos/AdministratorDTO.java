@@ -1,35 +1,35 @@
 package dtos;
 
-public class AdministradorDTO {
+public class AdministratorDTO {
     private int userId;
-    private String nome;
+    private String name;
     private String password;
     private String email;
 
-    public AdministradorDTO() {
+    public AdministratorDTO() {
     }
 
-    public AdministradorDTO(String nome, String password, String email) {
-       // this.userId = userId;
-        this.nome = nome;
+    public AdministratorDTO(int userId, String name, String password, String email) {
+        this.userId = userId;
+        this.name = name;
         this.password = password;
         this.email = email;
     }
 
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
-
-    public String getNome() {
-        return nome;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

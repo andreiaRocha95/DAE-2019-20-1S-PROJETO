@@ -1,10 +1,15 @@
 <template>
-  <b-container>
-    <h4>Administrator Details:</h4>
-    <p>Username: {{ coach.userId }}</p>
-    <p>Name: {{ coach.name }}</p>
-    <p>Email: {{ coach.email }}</p>
-    <nuxt-link to="/coaches">Back</nuxt-link>
+  <b-container class="p-4">
+    <h4>Coach Details:</h4>
+    <b-container>
+      <br/>
+      <p><b>UserId:</b> {{ coach.userId }}</p>
+      <p><b>Name:</b> {{ coach.name }}</p>
+      <p><b>Email:</b> {{ coach.email }}</p>
+    </b-container>
+
+    <nuxt-link to="/coaches"><b-button >Back</b-button></nuxt-link>
+
   </b-container>
 </template>
 <script>

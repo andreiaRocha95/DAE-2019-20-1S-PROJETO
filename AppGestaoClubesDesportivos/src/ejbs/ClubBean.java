@@ -1,9 +1,7 @@
 package ejbs;
 
-import entities.Course;
-import exceptions.MyEntityExistsException;
+import entities.Club;
 import exceptions.MyEntityNotFoundException;
-
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -11,51 +9,50 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Stateless(name = "CourseEJB")
-public class CourseBean {
+@Stateless(name = "ClubEJB")
+public class ClubBean {
 
     @PersistenceContext
     private EntityManager em;
 
-    public void create(int courseCode, String name) {
-        try{
-            Course course = new Course(courseCode, name);
-            em.persist(course);
-
-        }catch(Exception e){
-            throw new EJBException("ERROR_CREATING_COURSE" +e.getMessage());
-        }
-
-    }
-
-    public Course findCourse(int courseCode) {
-        try{
-            return em.find(Course.class, courseCode);
-        } catch (Exception e) {
-            throw new EJBException("ERROR_FINDING_COURSE" +e.getMessage());
-        }
-    }
-
-    public List<Course> all() {
+    public void create(int clubCode, String name) {
         try {
-            // remember, maps to: “SELECT c FROM Course c ORDER BY c.name”
-            return (List<Course>) em.createNamedQuery("getAllCourses").getResultList();
+            Club club = new Club(clubCode, name);
+            em.persist(club);
+
         } catch (Exception e) {
-            throw new EJBException("ERROR_RETRIEVING_COURSES" +e.getMessage());
+            throw new EJBException("ERROR_CREATING_CLUB" + e.getMessage());
+        }
+
+    }
+
+    public Club findClub(int clubCode) {
+        try {
+            return em.find(Club.class, clubCode);
+        } catch (Exception e) {
+            throw new EJBException("ERROR_FINDING_CLUB" + e.getMessage());
         }
     }
 
-    public void update(int courseCode, String name) throws MyEntityNotFoundException{
+    public List<Club> all() {
         try {
-            Course course = em.find(Course.class, courseCode);
-            if (course == null) {
-                throw new MyEntityNotFoundException("There is no course with that code:("+courseCode+")");
+            return (List<Club>) em.createNamedQuery("getAllClubs").getResultList();
+        } catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_CLUBS" + e.getMessage());
+        }
+    }
+
+    public void update(int clubCode, String name) throws MyEntityNotFoundException {
+        try {
+            Club club = em.find(Club.class, clubCode);
+            if (club == null) {
+                throw new MyEntityNotFoundException("There is no course with that code:(" + clubCode + ")");
             }
-            course.setName(name);
+            club.setName(name);
         } catch (MyEntityNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new EJBException("ERROR_UPDATE_Course" +e.getMessage());
+            throw new EJBException("ERROR_UPDATE_CLUB" + e.getMessage());
         }
     }
 

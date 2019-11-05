@@ -1,48 +1,57 @@
 package ejbs;
 
-
-
-import entities.Administrador;
+import entities.Administrator;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.util.List;
 
-@Stateful(name = "AdministadorEJB")
-public class AdministadorBean {
+@Stateful(name = "AdministratorEJB")
+public class AdministradorBean {
 
     @PersistenceContext
     private EntityManager em;
 
-    public void create(int userId, String password, String name, String email) {
-        try{
-            Administrador administrador = new Administrador(userId, password, name, email);
-            em.persist(administrador);
-
-        }catch(Exception e){
-            throw new EJBException("ERROR_CREATING_administrador", e);
-        }
-    }
-
-    public Administrador findAdministrador(int userId) {
-        try{
-            return em.find(Administrador.class, userId);
-        } catch (Exception e) {
-            throw new EJBException("ERROR_FINDING_administrador", e);
-        }
-    }
-
-    public List<Administrador> all() {
+    public void create(int userId, String name, String password, String email) {
         try {
-            // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
-            return (List<Administrador>) em.createNamedQuery("getAllAdministradores").getResultList();
+            Administrator administrator = new Administrator(userId, name, password, email);
+            em.persist(administrator);
+
         } catch (Exception e) {
-            throw new EJBException("ERROR_RETRIEVING_Administradores", e);
+            throw new EJBException("ERROR_CREATING_ADMINISTRATOR", e);
         }
     }
 
+    public Administrator findAdministrador(int userId) {
+        try {
+            return em.find(Administrator.class, userId);
+        } catch (Exception e) {
+            throw new EJBException("ERROR_FINDING_ADMINISTRATOR", e);
+        }
+    }
+
+    public List<Administrator> all() {
+        try {
+            return (List<Administrator>) em.createNamedQuery("getAllAdministrators").getResultList();
+        } catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_ADMINISTRATORS", e);
+        }
+    }
+
+    public void delete(int userId) {
+        try {
+            Administrator administrator = em.find(Administrator.class, userId);
+            if (administrator == null) {
+                return;
+            }
+            em.remove(administrator);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+
+    }
 
 }

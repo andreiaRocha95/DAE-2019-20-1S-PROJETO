@@ -1,8 +1,9 @@
 package ws;
 
-import dtos.CoachDTO;
-import ejbs.CoachBean;
-import entities.Coach;
+import dtos.AthleteDTO;
+import ejbs.AthleteBean;
+import entities.Athlete;
+
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ws.rs.*;
@@ -11,42 +12,43 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("/coaches")
+@Path("/athletes")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 
-public class CoachController {
+public class AthleteController {
     @EJB
-    private CoachBean coachBean;
+    private AthleteBean athleteBean;
 
-    CoachDTO toDTO(Coach coach) {
-        return new CoachDTO(
-                coach.getUserId(),
-                coach.getName(),
-                coach.getPassword(),
-                coach.getEmail()
+    AthleteDTO toDTO(Athlete athlete) {
+        return new AthleteDTO(
+                athlete.getUserId(),
+                athlete.getName(),
+                athlete.getPassword(),
+                athlete.getEmail()
         );
     }
+
     // converts an entire list of entities into a list of DTOs
-    List<CoachDTO> toDTOs(List<Coach> coaches) {
-        return coaches.stream().map(this::toDTO).collect(Collectors.toList());
+    List<AthleteDTO> toDTOs(List<Athlete> athletes) {
+        return athletes.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
     @GET
     @Path("{userId}")
-    public Response getCoachDetails(@PathParam("userId") int userId)
-    {
+    public Response getAthleteDetails(@PathParam("userId") int userId) {
         String msg;
         try {
-            Coach coach = coachBean.findCoach(userId);
-            if (coach != null) {
+            Athlete athlete = athleteBean.findAthlete(userId);
+            if (athlete != null) {
                 return Response.status(Response.Status.OK)
-                        .entity(toDTO(coach))
+                        .entity(toDTO(athlete))
                         .build();
             }
-            msg = "ERROR_FINDING_COACH";
+            msg = "ERROR_FINDING_ATHLETE";
             System.err.println(msg);
         } catch (Exception e) {
-            msg = "ERROR_FETCHING_COACH_DETAILS --->" + e.getMessage();
+            msg = "ERROR_FETCHING_ATHLETE_DETAILS --->" + e.getMessage();
             System.err.println(msg);
         }
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
@@ -57,11 +59,11 @@ public class CoachController {
 
     @GET // means: to call this endpoint, we need to use the verb get
     @Path("/") // means: the relative url path is “/api/coaches/”
-    public List<CoachDTO> all() {
+    public List<AthleteDTO> all() {
         try {
-            return toDTOs(coachBean.all());
+            return toDTOs(athleteBean.all());
         } catch (Exception e) {
-            throw new EJBException("ERROR_GET_COACHES", e);
+            throw new EJBException("ERROR_GET_ATHLETES", e);
         }
     }
 }

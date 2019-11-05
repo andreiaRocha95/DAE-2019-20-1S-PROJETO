@@ -2,7 +2,7 @@
   <!-- easy components usage, already shipped with bootstrap css-->
   <div>
     <b-container>
-      <h1> Coaches Management</h1>
+      <h1> Partners Management</h1>
       <div>
         <b-navbar toggleable="lg" type="light">
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -25,17 +25,17 @@
           </b-collapse>
         </b-navbar>
       </div>
-      <b-table striped over :items="coaches" :fields="fields">
+      <b-table striped over :items="partners" :fields="fields">
         <template v-slot:cell(actions)="row">
 
-            <nuxt-link class="" :to="`/coaches/${row.item.userId}`">
+            <nuxt-link class="" :to="`/partners/${row.item.userId}`">
               <b-button variant="">
               Details
               </b-button>
             </nuxt-link>
 
 
-            <nuxt-link class="":to="`/coaches/${row.item.userId}`">
+            <nuxt-link class="":to="`/partners/${row.item.userId}`">
               <b-button variant="info">
                 Edit
               </b-button>
@@ -43,7 +43,7 @@
 
 
 
-            <nuxt-link class="":to="`/coaches/${row.item.userId}`">
+            <nuxt-link class="":to="`/partners/${row.item.userId}`">
               <b-button variant="danger">
                 Delete
               </b-button>
@@ -64,14 +64,14 @@
         data () {
             return {
                 fields: ['userId', 'name', 'email', 'actions'],
-                coaches: []
+                partners: []
             }
         },
         created () {
-            this.$axios.$get("http://localhost:8080/AppGestaoClubesDesportivos_war_exploded/api/coaches/")
-            this.$axios.$get("/api/coaches")
-                .then(coaches => {
-                    this.coaches = coaches
+            this.$axios.$get("http://localhost:8080/AppGestaoClubesDesportivos_war_exploded/api/partners/")
+            this.$axios.$get("/api/partners")
+                .then(partners => {
+                    this.partners = partners
                 })
         }
     }

@@ -2,7 +2,6 @@ package entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,7 +11,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     @Id
-    private String username;
+    private int userId;
 
     @Version
     private int version;
@@ -24,30 +23,29 @@ public class User implements Serializable {
     private String name;
 
 
-
     @NotNull
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-            +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-            +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
             message = "{invalid.email}")
     private String email;
 
     public User() {
     }
 
-    public User(String username, String password, String name, String email) {
-        this.username = username;
+    public User(int userId, String name, String password, String email) {
+        this.userId = userId;
         this.password = password;
         this.name = name;
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
@@ -73,7 +71,6 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
 
 }

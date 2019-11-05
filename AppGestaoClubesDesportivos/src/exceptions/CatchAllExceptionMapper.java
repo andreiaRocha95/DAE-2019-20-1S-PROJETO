@@ -5,8 +5,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class CatchAllExceptionMapper implements ExceptionMapper<Exception>
-{
+public class CatchAllExceptionMapper implements ExceptionMapper<Exception> {
     @Override
     public Response toResponse(Exception e) {
         return
